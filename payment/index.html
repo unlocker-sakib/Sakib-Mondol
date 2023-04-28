@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment / Sakib Mondol</title>
+<link rel="stylesheet" href="style.css">
+      
+  </head>
+  <body>
+<header><h2 style="text-align:center";> Receiver : Sakib Mondol<h3></header><hr>
+<h2 style="text-align:center";>Payment Number<br>01301129359</h2> <hr>
+<marquee>উপরে দেওয়া নম্বারে বিকাশ অথবা নগদ থেকে সেন্ড মানি করুন। যে নম্বর থেকে টাকা পাঠিয়েছেন, সেই নম্বর টি লিখুন, এবং Write youre message box এ আপনার সাথে যোগাযোগ এর মাধ্যম দিন, এটা হতে পারে, আপনার ফেসবুক আইডি লিংক, বা Messenger, বা মোবাইল নম্বর, বা টেলিগ্রাম আইডি, বা আপনার  জিমেইল আইডি যেকোনো একটি দিয়ে আমাদের কাছে পাঠিয়ে দিন। </marquee>
+
+    <form id="payment-form">
+      <label for="payment-number">Your payment number:</label>
+      <input type="text" id="payment-number" name="payment-number">
+
+      <fieldset class="checkbox-group">
+        <legend>Payment Method:</legend>
+        <input type="checkbox" id="bkash" name="payment-method" value="bkash">
+        <label for="bkash">Bkash</label>
+
+        <input type="checkbox" id="nagad" name="payment-method" value="nagad">
+        <label for="nagad">Nagad</label>
+      </fieldset>
+
+      <label for="message">Write your message:</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit" id="send-request">Send Request</button>
+    </form>
+
+    <script>
+      const form = document.getElementById('payment-form');
+      const sendRequestButton = document.getElementById('send-request');
+      const bkashCheckbox = document.getElementById('bkash');
+      const nagadCheckbox = document.getElementById('nagad');
+
+      bkashCheckbox.addEventListener('change', () => {
+        if (bkashCheckbox.checked) {
+          nagadCheckbox.checked = false;
+        }
+      });
+
+      nagadCheckbox.addEventListener('change', () => {
+        if (nagadCheckbox.checked) {
+          bkashCheckbox.checked = false;
+        }
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault(); // prevent the form from submitting normally
+
+        const paymentNumber = document.getElementById('payment-number').value;
+        const paymentMethodElements = document.getElementsByName('payment-method');
+        const paymentMethods = Array.from(paymentMethodElements)
+          .filter((element) => element.checked)
+          .map((element) => element.value)
+          .join(', ');
+        const message = document.getElementById('message').value;
+
+        // Send a message to the Telegram bot using the Telegram API
+        const apiUrl = 'https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage';
+        const messageText = `Payment request received!\n\nPayment number: ${paymentNumber}\nPayment method: ${paymentMethods}\nMessage: ${message}`;
+        const requestBody = new URLSearchParams({
+          chat_id: '<YOUR_CHAT_ID>',
+          text: messageText,
+        });
+        fetch(apiUrl, {
+          method: 'POST',
+          body: requestBody,
+        })
+        .then(() => {
+          alert('Message sent successfully!');
+        })
+        .catch((error) => {
+          console.error(error);
+          alert('Failed to send message. Please try again later.');
+        });
+      });
+    </script>
+  </body><br><br>
+  <footer><h3>©2023 Sakib Mondol All Right Reserved</h3></footer>
+</html>
+
