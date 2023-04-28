@@ -1,0 +1,12 @@
+{
+  "short_name": "Sakib Mondol",
+  "name": "Md: Sakib Mondol",
+  "icons": [{
+    "src": "marisa-brantley0-logo.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "https://t.me/sakibmondol",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa"
+}
