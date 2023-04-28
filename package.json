@@ -1,0 +1,17 @@
+{
+  "name": "Md: Sakib Mondol",
+  "version": "0.0.1",
+  "description": "Technologys expert",
+  "keywords": "Facebook Problem",
+  "license": "Teamx1337 shofikul Islam",
+  "author": "solver",
+  "scripts": {
+    "build": "parcel build index.html",
+    "dev": "parcel index.html --open",
+    "start": "npm run build && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
